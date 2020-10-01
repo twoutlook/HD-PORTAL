@@ -87,18 +87,19 @@
     <div class="container">
      <h1>
             <br />
-         <a href='./'>Index</a> -> PART</h1>
+         <a href='./'>系統信息管理</a> -> PART</h1>
 
 
 
 
 
-
+        <div style="font-family:monospace">
 
               <%=GetHtmlTableWhRec(@"
-select ID, PART 料號 ,RANK_FINAL [批/序號(RANK)],PART_FULL 數據庫實際料號 from TW_BASE_PART order by PART_FULL
+select top 3000 ID, PART 料號 ,RANK_FINAL [批/序號(RANK)],PART_FULL 數據庫實際料號 from TW_BASE_PART order by PART_FULL
 
 ")%>
+            </div>
         <div><hr />
            頁面更新時間: <%=showTime()%>
         <hr /> </div>

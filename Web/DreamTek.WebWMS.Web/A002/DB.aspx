@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CMD.aspx.cs" Inherits="CMD" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DB.aspx.cs" Inherits="DB" %>
 
 <!DOCTYPE html>
 
@@ -84,87 +84,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container-fluid">
-          <h1>
-            <br />
-         <a href='./'>系統信息管理</a> ->CMD</h1>
-        <p>DB 數據字典 <a href="http://tmc.jungle123.com/hd/db/CMD_MST/">http://tmc.jungle123.com/hd/db/CMD_MST/</a> </p>
-       <h3>命令列表-未處理 (09/30 14:00 包括狀態為0 和1)</h3>
-
-      
-        <%=GetHtmlTableWhRec(@"
-SELECT 
-WmsTskId
-,CmdSno
-,CmdSts
-
-,StnNo
-,CmdMode
-,Loc	
-,[TrnDate]
-,[EndTime]
-,CMDNO
-,LINEID
-,CTICKETCODE
-,PACKAGENO
-,REMARK	 FROM CMD_MST cmd WHERE cmd.LINEID = 1 and cmd.StnNo in ('1','2') and cmd.CmdSts in ('0','1');
-
-")%>
-        
-NOTE:狀態1是指進行中,12,22,52 可以继续下命令,狀態會保持為1
-            
-        <ul>
-            <li>12：入库任务下达主机命令</li>
-<li>22：出库任务下达主机命令 </li>
-<li>52：库对库任务下达主机命令</li>
-
-             
-             
-            
-        </ul>
-
-
+    <div class="container">
+        <form id="form1" runat="server">
+            <div>
+            </div>
+        </form>
+        <h1>  <a href='./'>系統信息管理</a> -> DB</h1>
+         
         <hr />
-     
-        
-          <h3>命令列表-最近30筆</h3>
- 
-      
-        <%=GetHtmlTableWhRec(@"
-SELECT TOP 30
-WmsTskId
-,CmdSno
-,CmdSts
-
-,StnNo
-,CmdMode
-,Loc	
-,[TrnDate]
-,[EndTime]
-,CMDNO
-,LINEID
-,CTICKETCODE
-,PACKAGENO
-,REMARK	 FROM CMD_MST cmd WHERE cmd.LINEID = 1 and cmd.StnNo in ('1','2') 
-ORDER BY WmsTskId DESC
+       <%--WHERE ROUTINE_TYPE = 'PROCEDURE'--%>
+        <%=GetHtmlTableWhRec_ROUTINE_NAME(@"
+SELECT 
+ ROUTINE_TYPE,
+  ROUTINE_NAME
+FROM INFORMATION_SCHEMA.ROUTINES
+ORDER BY ROUTINE_TYPE,ROUTINE_NAME
 ;
 
 ")%>
-
-        NOTE:        ,FORMAT(CAST([TrnDate] As DATETIME),'MM/dd HH:mm') TRANS  遇到不同格式的日期時間會出錯。
-        
-           <hr />
-
-        
-
-
-
-        <div>
-            <hr />
-            頁面更新時間: <%=showTime()%>
-            <hr />
-        </div>
-
-    </div>
+       </div>
 </body>
 </html>

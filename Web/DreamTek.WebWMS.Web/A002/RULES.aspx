@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CMD.aspx.cs" Inherits="CMD" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RULES.aspx.cs" Inherits="RULES" %>
 
 <!DOCTYPE html>
 
@@ -87,76 +87,19 @@
     <div class="container-fluid">
           <h1>
             <br />
-         <a href='./'>系統信息管理</a> ->CMD</h1>
-        <p>DB 數據字典 <a href="http://tmc.jungle123.com/hd/db/CMD_MST/">http://tmc.jungle123.com/hd/db/CMD_MST/</a> </p>
-       <h3>命令列表-未處理 (09/30 14:00 包括狀態為0 和1)</h3>
-
-      
-        <%=GetHtmlTableWhRec(@"
-SELECT 
-WmsTskId
-,CmdSno
-,CmdSts
-
-,StnNo
-,CmdMode
-,Loc	
-,[TrnDate]
-,[EndTime]
-,CMDNO
-,LINEID
-,CTICKETCODE
-,PACKAGENO
-,REMARK	 FROM CMD_MST cmd WHERE cmd.LINEID = 1 and cmd.StnNo in ('1','2') and cmd.CmdSts in ('0','1');
-
-")%>
-        
-NOTE:狀態1是指進行中,12,22,52 可以继续下命令,狀態會保持為1
-            
-        <ul>
-            <li>12：入库任务下达主机命令</li>
-<li>22：出库任务下达主机命令 </li>
-<li>52：库对库任务下达主机命令</li>
-
-             
-             
-            
-        </ul>
-
-
-        <hr />
+         <a href='./'>系統信息管理</a> ->RULES</h1>
      
-        
-          <h3>命令列表-最近30筆</h3>
- 
-      
-        <%=GetHtmlTableWhRec(@"
-SELECT TOP 30
-WmsTskId
-,CmdSno
-,CmdSts
 
-,StnNo
-,CmdMode
-,Loc	
-,[TrnDate]
-,[EndTime]
-,CMDNO
-,LINEID
-,CTICKETCODE
-,PACKAGENO
-,REMARK	 FROM CMD_MST cmd WHERE cmd.LINEID = 1 and cmd.StnNo in ('1','2') 
-ORDER BY WmsTskId DESC
-;
+        <h2>台惟案不管制棧板號不使用PDA</h2>
+        <p>台惟只有一線,兩個入出口,都可以進和出。</p>
+         <p>由於無法使用棧板號判斷各類型操作,無法智能出入庫,基於避免人工操作的各種疏失造成帳料不符,系統實施以下卡控。</p>
+
+        <%=GetHtmlTableWhRec(@"
+SELECT ACTION,RULES,CMD,TRANS,REM FROM dbo.BASE_RULES ORDER BY SEQ;
 
 ")%>
 
-        NOTE:        ,FORMAT(CAST([TrnDate] As DATETIME),'MM/dd HH:mm') TRANS  遇到不同格式的日期時間會出錯。
-        
-           <hr />
-
-        
-
+       NOTE: ***產生盤點出庫指令如何一個一個下發給WCS。必需前一個盤點完成後才能進行下一個。目前盤點是按統計平均分配到各站點, 必需調整SP。
 
 
         <div>
