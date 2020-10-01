@@ -89,19 +89,26 @@
             <div>
             </div>
         </form>
-        <h1>  <a href='./'>系統信息管理</a> -> DB</h1>
+        <h1> <br /> <a href='./'>系統信息管理</a> -> DB</h1>
          
         <hr />
        <%--WHERE ROUTINE_TYPE = 'PROCEDURE'--%>
         <%=GetHtmlTableWhRec_ROUTINE_NAME(@"
 SELECT 
+  ROUTINE_SCHEMA,
  ROUTINE_TYPE,
   ROUTINE_NAME
 FROM INFORMATION_SCHEMA.ROUTINES
+WHERE ROUTINE_TYPE = 'PROCEDURE'
 ORDER BY ROUTINE_TYPE,ROUTINE_NAME
 ;
 
 ")%>
-       </div>
+      
+
+     
+        <div><hr />
+           頁面更新時間: <%=showTime()%>
+        <hr /> </div> </div>
 </body>
 </html>

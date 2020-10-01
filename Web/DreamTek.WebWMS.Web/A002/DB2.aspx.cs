@@ -9,11 +9,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Security.Cryptography;
+
+//https://docs.microsoft.com/en-us/troubleshoot/dotnet/csharp/compute-hash-values
+// TO HASH
 public partial class DB2 : System.Web.UI.Page
 {
     public string cell_num = "";
     public string CUST = "";
     public string name = "";
+
+    string sSourceData;
+    byte[] tmpSource;
+    byte[] tmpHash;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -286,7 +294,30 @@ ON T1.cinvcode = T2.PART_FULL WHERE CELL = '{0}'"
             , cell_num);
         return GetHtmlTableWhRec(strSQL);
     }
+    public string showTime()
+    {
+        return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
+    static string ByteArrayToString(byte[] arrInput)
+    {
+        int i;
+        StringBuilder sOutput = new StringBuilder(arrInput.Length);
+        for (i = 0; i < arrInput.Length; i++)
+        {
+            sOutput.Append(arrInput[i].ToString("X2"));
+        }
+        return sOutput.ToString();
+    }
 
+    //https://docs.microsoft.com/en-us/troubleshoot/dotnet/csharp/compute-hash-values
+    public string GetHash()
+    {
+        sSourceData = GetOneRowOneFieldByName();
+        tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData);
+        //Compute hash based on source data.
+        tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
+        return ByteArrayToString(tmpHash);
+    }
     public string GetOneRowOneFieldByName()
     {
         string strSQL= String.Format("SELECT OBJECT_DEFINITION(OBJECT_ID(N'{0}'))",name);

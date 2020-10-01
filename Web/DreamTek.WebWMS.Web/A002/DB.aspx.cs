@@ -482,6 +482,10 @@ ON T1.cinvcode = T2.PART_FULL WHERE CELL = '{0}'"
         //var htmlStr = "<tr><td>" + record[0] + "</td><td>" + record[1] + "</td><td>" + record[2] + "</td></tr>";
         return sb.ToString();
     }
+    public string showTime()
+    {
+        return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
     private static string ReadSingleRowV2WhRec_ROUTINE_NAME(IDataRecord record, int rec)
     {
         StringBuilder sb = new StringBuilder("<tr><th>" + rec + "</th>");

@@ -89,14 +89,16 @@
             <div>
             </div>
         </form>
-        <h1>  <a href='./DB.aspx'>DB</a> ->  <%=GetName()%></h1>
-         
+        <h1><br />  <a href='./DB.aspx'>DB</a> ->  <%=GetName()%></h1>
+         <p style="font-size:125%; font-family:monospace"><%=GetHash()%></p>
         <hr />
         
         <pre><code>
              <%=GetOneRowOneFieldByName()%>
 
             </code> </pre>
-       </div>
+      <div><hr />
+           頁面更新時間: <%=showTime()%>
+        <hr /> </div> </div>
 </body>
 </html>
