@@ -330,7 +330,13 @@ ON T1.cinvcode = T2.PART_FULL WHERE CELL = '{0}'"
         }
         return ipAdd;
     }
-        public string GetHashJson()
+   
+ public string GetServerIpValue()
+    {
+      
+        return Request.ServerVariables["LOCAL_ADDR"]; ;
+    }
+    public string GetHashJson()
     {
         sSourceData = GetOneRowOneFieldByName();
         tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData);
@@ -343,7 +349,7 @@ ON T1.cinvcode = T2.PART_FULL WHERE CELL = '{0}'"
 
         JObject rss =
             new JObject(
-                new JProperty("IP", GetIpValue()),
+                new JProperty("IP", GetServerIpValue()),
                  new JProperty(name, strHash));
 
         //   JValue date = new JValue(new DateTime(2000, 5, 23));

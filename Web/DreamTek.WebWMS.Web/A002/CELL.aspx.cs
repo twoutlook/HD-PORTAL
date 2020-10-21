@@ -13,7 +13,10 @@ public partial class CELL : System.Web.UI.Page
 {
     public string cell_num = "";
     public string CUST = "";
-
+    public string showTime()
+    {
+        return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         cell_num = Request.QueryString["CELL"];

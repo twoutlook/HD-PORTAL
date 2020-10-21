@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qhdNnZm2Dds1nPybuUOK8/Z+WHWWu0NIyvAE/C82oupR74Q5vJ2pimSwbg9IoLdIYkysWWNTWi1TCcukNwffIQ==",
+  "success": true,
+  "projectFilePath": "C:\\2020\\projects\\TAIWAY\\0926Lite\\branches\\Web\\API\\API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.2\\microsoft.netcore.app.host.win-x64.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
